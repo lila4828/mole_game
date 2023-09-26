@@ -2,29 +2,48 @@ import javax.swing.*;
 import java.awt.*;
 
 public class mole_game {
-    static class background extends JFrame{
-        private ImageIcon icon;
 
-        public background() {
-            icon = new ImageIcon("grass.jpg");
+    public static class MyFrame extends JFrame {
+        Container c;
+        JPanel main_panel, panel;
+        JButton easy_button, hard_button;
+        String str_list[] = {"초보자용", "상급자용"};
+        ImageIcon background = new ImageIcon("src/grass.jpg");
 
-            JPanel background = new JPanel() {
-                public void paintComponent(Graphics g) {
-                    g.drawImage(icon.getImage(), 0, 0, null);
-                    setOpaque(false);
-                    super.paintComponent(g);
+        MyFrame() {
+            setTitle("mole_game");
+            setSize(1200, 800);
+            setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            setPanel();
+            setVisible(true);
+        }
+
+        private void setPanel() {
+            c = getContentPane();
+            main_panel = new JPanel() {
+                public void paint(Graphics g) {//그리는 함수
+                    g.drawImage(background.getImage(), 0, 0, null);
                 }
             };
+            main_panel.setLayout(new BorderLayout());
+            panel.setLayout(new BorderLayout());
+            main_panel.add(panel,BorderLayout.SOUTH);
+
+            easy_button = new JButton(str_list[0]);
+            hard_button = new JButton(str_list[1]);
+            panel.add(easy_button,BorderLayout.EAST);
+            panel.add(hard_button,BorderLayout.WEST);
+
+            c.add(main_panel);
         }
     }
 
     public static void main(String[] args) {
-        background frame = new background();
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(1024, 768);
-        frame.setVisible(true);
+        new MyFrame();
     }
 }
+
+
 
 /*
 import java.awt.*;
